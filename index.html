@@ -1,7 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple todo list</title>
+    <!--<link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>我在用githubpages呢！</p>
+
+<header>
+    <h2>My Todo List</h2>
+</header>
+
+<div id="left-view" class="on-test" onblur="blurLeft();" tabindex="0">
+    <div id="project-list">
+        <ul>
+            <li id="project-0" data-projectid="0" onclick="clickProject(this)">
+                <i class="fa fa-bars"></i><span>学习前端</span>
+                <i class="fa fa-ellipsis-h" onclick="showDropdownMenu(this);"></i>
+            </li>
+            <li id="project-1" data-projectid="-1" onclick="clickProject(this)">
+                <i class="fa fa-bars"></i><span>娱乐</span>
+            </li>
+            <li onclick="addProject()">
+                <i class="fa fa-plus-circle"></i><span>创建清单</span>
+            </li>
+        </ul>
+    </div>
+    <div id="project-dropdown-menu">
+        <ul>
+            <li onclick="editProjectName();">编辑</li>
+            <li onclick="deleteProject();">删除</li>
+        </ul>
+    </div>
+</div>
+
+<div id="wrapper">
+<div id="center-view">
+    <div id="project-name">
+        <i class="fa fa-bars" id="expand-left" onclick="expandLeft();" title="点击展开目录"></i>
+        <h3 class="inline-block">学习前端</h3>
+        <!--<i class="fa fa-ellipsis-h"></i>-->
+    </div>
+    <div id="add-task">
+        <input type="text" placeholder="添加任务" id="add-task-input">
+    </div>
+    <div id="task-list">
+        <ul>
+            <li data-taskid="0" class="title-list active">
+                <i class="fa fa-square-o"></i>
+                <span class="task-title">学习gulp</span>
+            </li>
+            <li data-taskid="1" class="title-list">
+                <i class="fa fa-square-o"></i>
+                <span class="task-title">完成todolist</span>
+            </li>
+            <li data-taskid="2" class="title-list">
+                <i class="fa fa-square-o"></i>
+                <span class="task-title">学习less</span>
+            </li>
+        </ul>
+
+        <!--已完成的任务显示在这里-->
+        <div id="finished-task">
+            <h5>已完成</h5>
+            <ul>
+                <li class="title-list finished">
+                    <i class="fa fa-fw fa-check-square-o"></i>
+                    <span class="task-title">看《JavaScript精粹》</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="right-view"  tabindex="1">
+    <div id="content-mask" class="not-selected"></div>
+    <div id="task-setting">
+        <i class="fa fa-angle-left fa-2x" title="收起" onclick="hideRight();"></i>
+        <div id="date-setting" onclick="showDatePicker(event)">
+            <i class="fa fa-calendar"></i>
+            <!--<input id="date-setting-input" placeholder="请输入日期" oninput="setDate(this)"/>-->
+
+            <span id="date-setting-span"></span>
+            <div id="date-picker">
+                <input type="text">
+                <span id="date-info">请按以下格式输入日期：<br>2016-04-14</span><br>
+                <button id="clear-date" onclick="clearDate(event, this)">清除日期</button>
+                <button id="select-date" onclick="setDate(event, this)">设定日期</button>
+            </div>
+        </div>
+    </div>
+    <div id="task-content">
+        <textarea placeholder="请在这里输入任务的具体内容" data-taskid="-1" oninput="editTaskContent(this)" spellcheck="false"></textarea>
+    </div>
+
+    <div class="footer">
+        <div id="delete-task" data-taskid="-1" title="点击这里删除任务">
+            <i class="fa fa-trash-o" onclick="clickToDeleteTask(this);"></i>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/todo.js"></script>
 </body>
 </html>
